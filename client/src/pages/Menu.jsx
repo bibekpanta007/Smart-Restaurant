@@ -1,45 +1,64 @@
 import { useState } from 'react';
 import MenuCard from '../components/MenuCard';
+import FilterBar from '../components/FilterBar';
 import { getMenuItems, categories } from '../data/menuData';
 
 function Menu() {
   const items = getMenuItems();
 
-  // what the user types in the search box
+  // filter values
   const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('All');
+  const [dietary, setDietary] = useState('All');
+  const [maxPrice, setMaxPrice] = useState(20);
 
-  // keep only items whose name or description matches the search
+  // an item is shown only if it passes every filter
   const filteredItems = items.filter((item) => {
     const text = search.toLowerCase();
-    return (
+    const matchesSearch =
       item.name.toLowerCase().includes(text) ||
-      item.description.toLowerCase().includes(text)
-    );
+      item.description.toLowerCase().includes(text);
+    const matchesCategory = category === 'All' || item.category === category;
+    const matchesDietary = dietary === 'All' || item.dietary.includes(dietary);
+    const matchesPrice = item.price <= maxPrice;
+
+    return matchesSearch && matchesCategory && matchesDietary && matchesPrice;
   });
+
+  function resetFilters() {
+    setSearch('');
+    setCategory('All');
+    setDietary('All');
+    setMaxPrice(20);
+  }
 
   return (
     <div>
       <h2 className="page-title">Our Menu</h2>
 
-      <input
-        type="text"
-        className="search-input"
-        placeholder="Search the menu..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+      <FilterBar
+        search={search} setSearch={setSearch}
+        category={category} setCategory={setCategory}
+        dietary={dietary} setDietary={setDietary}
+        maxPrice={maxPrice} setMaxPrice={setMaxPrice}
+        categories={categories}
       />
 
-      {categories.map((category) => {
-        const categoryItems = filteredItems.filter(
-          (item) => item.category === category
-        );
+      {/* message when nothing matches */}
+      {filteredItems.length === 0 && (
+        <div className="no-results">
+          <p>No dishes match your filters.</p>
+          <button className="btn" onClick={resetFilters}>Reset filters</button>
+        </div>
+      )}
 
-        // skip categories with no matching items
+      {categories.map((cat) => {
+        const categoryItems = filteredItems.filter((item) => item.category === cat);
         if (categoryItems.length === 0) return null;
 
         return (
-          <section key={category} className="menu-section">
-            <h3 className="category-title">{category}</h3>
+          <section key={cat} className="menu-section">
+            <h3 className="category-title">{cat}</h3>
             <div className="menu-grid">
               {categoryItems.map((item) => (
                 <MenuCard key={item.id} item={item} />
