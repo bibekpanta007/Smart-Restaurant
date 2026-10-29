@@ -1,5 +1,9 @@
+import { useCart } from '../context/CartContext';
+
 // Shows one menu item. The item is passed in as a prop.
 function MenuCard({ item }) {
+  const { addToCart } = useCart();
+
   return (
     <div className="menu-card">
       <div className="menu-card-header">
@@ -13,7 +17,6 @@ function MenuCard({ item }) {
         <strong>Ingredients:</strong> {item.ingredients.join(', ')}
       </p>
 
-      {/* only show tags if the item has dietary info */}
       {item.dietary.length > 0 && (
         <div className="tags">
           {item.dietary.map((tag) => (
@@ -22,8 +25,14 @@ function MenuCard({ item }) {
         </div>
       )}
 
-      {/* show a message if the item is not available */}
-      {!item.available && <p className="unavailable">Currently unavailable</p>}
+      {/* button is disabled if the item is not available */}
+      <button
+        className="btn add-btn"
+        onClick={() => addToCart(item)}
+        disabled={!item.available}
+      >
+        {item.available ? 'Add to Cart' : 'Currently unavailable'}
+      </button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 // list of links shown in the navbar
 const links = [
@@ -11,6 +12,8 @@ const links = [
 ];
 
 function Navbar() {
+  const { totalItems } = useCart();
+
   return (
     <nav className="navbar">
       <h1 className="logo">Smart Restaurant</h1>
@@ -19,6 +22,10 @@ function Navbar() {
           <li key={link.path}>
             <NavLink to={link.path} end>
               {link.name}
+              {/* show the number of items next to Cart */}
+              {link.path === '/cart' && totalItems > 0 && (
+                <span className="cart-badge">{totalItems}</span>
+              )}
             </NavLink>
           </li>
         ))}
