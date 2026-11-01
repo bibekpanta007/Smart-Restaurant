@@ -24,7 +24,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/order/:id" element={<OrderConfirmation />} />
+          <Route path="/order/:id" element={<OrderConfirmation />} />
         </Routes>
       </main>
     </>

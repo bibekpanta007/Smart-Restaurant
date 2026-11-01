@@ -317,3 +317,168 @@ body {
   color: #555;
   margin-bottom: 20px;
 }
+
+/* cart buttons */
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* checkout */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: normal;
+}
+
+.order-type {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-top: 8px;
+}
+
+.order-type legend {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0 5px;
+}
+
+.checkout-form .radio {
+  flex-direction: row;
+  align-items: center;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.error {
+  color: #c62828;
+  font-size: 13px;
+}
+
+.hint {
+  color: #777;
+  font-size: 13px;
+}
+
+.checkout-form .btn {
+  margin-top: 15px;
+}
+
+/* order summary box */
+.order-summary {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.order-summary h3 {
+  margin-bottom: 12px;
+}
+
+.order-summary hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.summary-total {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* order confirmation */
+.confirmation-text {
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.status-tracker {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.status-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.status-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.status-step.done {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.status-step.done .status-dot {
+  background-color: #2e7d32;
+  color: white;
+}
+
+/* stack the checkout columns on small screens */
+@media (max-width: 750px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
