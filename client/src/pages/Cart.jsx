@@ -44,13 +44,18 @@ function Cart() {
         ))}
       </div>
 
-      <div className="cart-summary">
+            <div className="cart-summary">
         <p className="cart-total">
           Total: <strong>${totalPrice.toFixed(2)}</strong>
         </p>
-        <button className="btn btn-outline" onClick={clearCart}>
-          Clear Cart
-        </button>
+        <div className="cart-actions">
+          <button className="btn btn-outline" onClick={clearCart}>
+            Clear Cart
+          </button>
+          <Link to="/checkout" className="btn">
+            Checkout
+          </Link>
+        </div>
       </div>
     </div>
   );

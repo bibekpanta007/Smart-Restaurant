@@ -7,6 +7,7 @@ import Reservations from './pages/Reservations';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </main>
     </>
