@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 import Checkout from './pages/Checkout';
+import OrderConfirmation from './pages/OrderConfirmation';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/order/:id" element={<OrderConfirmation />} />
         </Routes>
       </main>
     </>
