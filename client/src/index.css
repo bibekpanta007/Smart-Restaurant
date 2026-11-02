@@ -616,3 +616,157 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* login / register */
+.auth-card {
+  max-width: 420px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card .page-title {
+  text-align: center;
+  font-size: 28px;
+}
+
+.auth-form .btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-error {
+  background-color: #fdecea;
+  color: #c62828;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.switch-text {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #8b2e1f;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.demo-hint {
+  margin-top: 15px;
+  padding: 8px;
+  background-color: #faf7f2;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
+/* navbar logout button */
+.navbar ul {
+  align-items: center;
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid #f5e6d3;
+  color: #f5e6d3;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #f5e6d3;
+  color: #8b2e1f;
+}
+
+/* profile */
+.profile-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 35px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #8b2e1f;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info p {
+  color: #555;
+}
+
+.role-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background-color: #f5e6d3;
+  color: #8b2e1f;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.profile-section {
+  margin-bottom: 35px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* order status colours */
+.status-received {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-preparing {
+  background-color: #fff4e0;
+  color: #b26a00;
+}
+
+.status-ready {
+  background-color: #ede7f6;
+  color: #5e35b1;
+}
+
+.status-delivered {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
