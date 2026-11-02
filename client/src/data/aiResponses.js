@@ -44,6 +44,10 @@ export const aiResponses = [
     answer: 'You can book a table on the Reservations page. We also host birthday parties and corporate events!',
   },
   {
+    keywords: ['thank', 'nice', 'great', 'awesome', 'cool'],
+    answer: "Glad I could help! Is there anything else you'd like to know?",
+  },
+  {
     keywords: ['hello', 'hey', 'good morning', 'good evening'],
     answer: "Hello! Ask me about today's specials, dietary options or recommendations.",
   },
