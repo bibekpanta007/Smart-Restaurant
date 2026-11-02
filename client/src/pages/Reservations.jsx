@@ -31,7 +31,7 @@ const emptyForm = {
 };
 
 function Reservations() {
-  const { reservations, addReservation } = useReservations();
+  const { reservations, addReservation, cancelReservation } = useReservations();
   const [form, setForm] = useState(emptyForm);
   const [errors, setErrors] = useState({});
   const [confirmation, setConfirmation] = useState(null);
@@ -175,6 +175,39 @@ function Reservations() {
 
         <button type="submit" className="btn">Book Now</button>
       </form>
+            <h3 className="section-title">My Reservations</h3>
+
+      {reservations.length === 0 ? (
+        <p className="hint">You have no reservations yet.</p>
+      ) : (
+        <div className="reservation-list">
+          {reservations.map((r) => (
+            <div key={r.id} className="reservation-card">
+              <div>
+                <h4>{r.type === 'Regular' ? 'Table reservation' : `${r.type} event`}</h4>
+                <p>{r.date} at {r.time} · {r.guests} guests</p>
+                {r.requirements && <p className="hint">Notes: {r.requirements}</p>}
+              </div>
+
+              <div className="reservation-right">
+                <span className={`status-badge status-${r.status.toLowerCase()}`}>
+                  {r.status}
+                </span>
+                {r.status !== 'Cancelled' && (
+                  <button
+                    className="remove-btn"
+                    onClick={() => {
+                      if (window.confirm('Cancel this reservation?')) cancelReservation(r.id);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
