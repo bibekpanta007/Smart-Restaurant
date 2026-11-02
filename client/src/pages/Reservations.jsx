@@ -58,7 +58,16 @@ function Reservations() {
       newErrors.date = 'Sorry, the restaurant is closed on Mondays.';
     }
 
-    if (!form.time) newErrors.time = 'Please choose a time.';
+        if (!form.time) {
+      newErrors.time = 'Please choose a time.';
+    } else if (form.date === getToday()) {
+      // for today, the time must be later than now
+      const [hour, minute] = form.time.split(':').map(Number);
+      const now = new Date();
+      if (hour < now.getHours() || (hour === now.getHours() && minute <= now.getMinutes())) {
+        newErrors.time = 'This time has already passed. Please choose a later time.';
+      }
+    }
 
     const guests = Number(form.guests);
     if (guests < 1 || guests > 20) newErrors.guests = 'Guests must be between 1 and 20.';
