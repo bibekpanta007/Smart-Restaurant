@@ -2,17 +2,19 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
+import { useAuth } from '../context/AuthContext';
 
 const DELIVERY_FEE = 4.99;
 
 function Checkout() {
   const { cartItems, totalPrice, clearCart } = useCart();
   const { placeOrder } = useOrders();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  // all form fields in one state object
+  // all form fields in one state object (name is filled in if logged in)
   const [form, setForm] = useState({
-    name: '',
+    name: user ? user.name : '',
     phone: '',
     orderType: 'pickup',
     address: '',
@@ -53,6 +55,7 @@ function Checkout() {
     if (Object.keys(newErrors).length > 0) return;
 
     const order = placeOrder({
+      userId: user ? user.id : null, // link the order to the logged-in user
       customer: {
         name: form.name,
         phone: form.phone,

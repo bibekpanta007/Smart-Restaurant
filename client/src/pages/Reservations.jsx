@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useReservations } from '../context/ReservationContext';
+import { useAuth } from '../context/AuthContext';
 
 // how many bookings one time slot can take (simulates a limited number of tables)
 const MAX_PER_SLOT = 3;
@@ -32,9 +34,17 @@ const emptyForm = {
 
 function Reservations() {
   const { reservations, addReservation, cancelReservation } = useReservations();
-  const [form, setForm] = useState(emptyForm);
+  const { user } = useAuth();
+
+  // fill in name and email automatically if logged in
+  const startForm = user ? { ...emptyForm, name: user.name, email: user.email } : emptyForm;
+
+  const [form, setForm] = useState(startForm);
   const [errors, setErrors] = useState({});
   const [confirmation, setConfirmation] = useState(null);
+
+  // only this user's reservations
+  const myReservations = user ? reservations.filter((r) => r.userId === user.id) : [];
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -58,7 +68,7 @@ function Reservations() {
       newErrors.date = 'Sorry, the restaurant is closed on Mondays.';
     }
 
-        if (!form.time) {
+    if (!form.time) {
       newErrors.time = 'Please choose a time.';
     } else if (form.date === getToday()) {
       // for today, the time must be later than now
@@ -72,7 +82,7 @@ function Reservations() {
     const guests = Number(form.guests);
     if (guests < 1 || guests > 20) newErrors.guests = 'Guests must be between 1 and 20.';
 
-    // prevent double booking: count active bookings in the same slot
+    // prevent double booking: count active bookings in the same slot (from all users)
     const bookedInSlot = reservations.filter(
       (r) => r.date === form.date && r.time === form.time && r.status !== 'Cancelled'
     ).length;
@@ -90,9 +100,13 @@ function Reservations() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    const reservation = addReservation({ ...form, guests: Number(form.guests) });
+    const reservation = addReservation({
+      ...form,
+      guests: Number(form.guests),
+      userId: user ? user.id : null, // link the reservation to the logged-in user
+    });
     setConfirmation(reservation); // show the success message
-    setForm(emptyForm); // clear the form
+    setForm(startForm); // reset the form
   }
 
   return (
@@ -105,7 +119,8 @@ function Reservations() {
           <div>
             <h3>Reservation request received!</h3>
             <p>
-              Thank you, {confirmation.name}. Your {confirmation.type === 'Regular' ? 'table' : confirmation.type.toLowerCase() + ' event'} for{' '}
+              Thank you, {confirmation.name}. Your{' '}
+              {confirmation.type === 'Regular' ? 'table' : confirmation.type.toLowerCase() + ' event'} for{' '}
               {confirmation.guests} guests on {confirmation.date} at {confirmation.time} is
               pending approval. A confirmation will be sent to {confirmation.email}.
             </p>
@@ -184,13 +199,18 @@ function Reservations() {
 
         <button type="submit" className="btn">Book Now</button>
       </form>
-            <h3 className="section-title">My Reservations</h3>
 
-      {reservations.length === 0 ? (
+      <h3 className="section-title">My Reservations</h3>
+
+      {!user ? (
+        <p className="hint">
+          <Link to="/login">Log in</Link> to see and manage your reservations.
+        </p>
+      ) : myReservations.length === 0 ? (
         <p className="hint">You have no reservations yet.</p>
       ) : (
         <div className="reservation-list">
-          {reservations.map((r) => (
+          {myReservations.map((r) => (
             <div key={r.id} className="reservation-card">
               <div>
                 <h4>{r.type === 'Regular' ? 'Table reservation' : `${r.type} event`}</h4>
