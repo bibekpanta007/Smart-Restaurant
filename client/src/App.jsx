@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 import ChatBot from './components/ChatBot';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/order/:id" element={<OrderConfirmation />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/login" element={<Login />} />
+          
 
           {/* logged-in users only */}
           <Route
@@ -52,6 +54,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
        <ChatBot />
     </>
   );
