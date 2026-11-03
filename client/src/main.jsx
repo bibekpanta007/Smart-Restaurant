@@ -7,6 +7,7 @@ import './index.css';
 import { OrderProvider } from './context/OrderContext';
 import { ReservationProvider } from './context/ReservationContext';
 import { AuthProvider } from './context/AuthContext';
+import { MenuProvider } from './context/MenuContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import MenuCard from '../components/MenuCard';
 import FilterBar from '../components/FilterBar';
-import { getMenuItems, categories } from '../data/menuData';
+import { categories } from '../data/menuData';
+import { useMenu } from '../context/MenuContext';
 
 function Menu() {
-  const items = getMenuItems();
+    const { menuItems: items } = useMenu();
 
   // filter values
   const [search, setSearch] = useState('');
