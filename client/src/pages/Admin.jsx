@@ -2,6 +2,8 @@ import { useState } from 'react';
 import AdminStats from '../components/admin/AdminStats';
 import AdminMenu from '../components/admin/AdminMenu';
 import AdminOrders from '../components/admin/AdminOrders';
+import AdminReservations from '../components/admin/AdminReservations';
+import AdminUsers from '../components/admin/AdminUsers';
 
 const tabs = ['Overview', 'Menu', 'Orders', 'Reservations', 'Users'];
 
@@ -28,8 +30,8 @@ function Admin() {
       {activeTab === 'Overview' && <AdminStats />}
       {activeTab === 'Menu' && <AdminMenu />}
       {activeTab === 'Orders' && <AdminOrders />}
-      {activeTab === 'Reservations' && <p className="hint">Coming next.</p>}
-      {activeTab === 'Users' && <p className="hint">Coming next.</p>}
+      {activeTab === 'Reservations' && <AdminReservations />}
+      {activeTab === 'Users' && <AdminUsers />}
     </div>
   );
 }
