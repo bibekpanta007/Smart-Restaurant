@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import { LuShoppingBag, LuCalendarDays, LuSparkles } from 'react-icons/lu';
 import { useMenu } from '../context/MenuContext';
 import { restaurant } from '../data/restaurantInfo';
-import { LuShoppingBag, LuCalendarDays, LuSparkles } from 'react-icons/lu';
 
 // small feature boxes under the special
 const features = [
@@ -11,15 +11,13 @@ const features = [
 ];
 
 function Home() {
-  const { menuItems } = useMenu();
-
-  // today's special (matches what the AI assistant says)
-  const special = menuItems.find((item) => item.name === 'Chicken Alfredo');
+  // today's special, chosen by the admin
+  const { special } = useMenu();
 
   return (
     <>
       <section className="hero">
-        <span className="hero-tag">Fresh • Local • Delicious</span>
+        <span className="hero-tag">{restaurant.tagline}</span>
         <h2>
           Great food,
           <br />
@@ -35,7 +33,8 @@ function Home() {
         </div>
       </section>
 
-      {special && (
+      {/* only show the special if it exists and is available */}
+      {special && special.available && (
         <section className="special-banner">
           {special.image && (
             <img

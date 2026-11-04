@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import { LuMessageCircle, LuX, LuSparkles } from 'react-icons/lu';
 import { aiResponses, fallbackAnswer, suggestedQuestions } from '../data/aiResponses';
 import { useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrderContext';
+import { useMenu } from '../context/MenuContext';
 import { restaurant } from '../data/restaurantInfo';
-import { LuMessageCircle, LuX, LuSparkles } from 'react-icons/lu';
 
 // turns ['A', 'B', 'C'] into "A, B and C"
 function joinNames(names) {
@@ -27,8 +28,16 @@ function getMostPopularItem(orders) {
   return best;
 }
 
-function getAnswer(question, user, orders) {
+function getAnswer(question, user, orders, special) {
   const text = question.toLowerCase();
+
+  // today's special, chosen by the admin
+  if (text.includes('special') || text.includes('today')) {
+    if (special && special.available) {
+      return `Today's special is ${special.name} for $${special.price.toFixed(2)}.`;
+    }
+    return "We don't have a special today, but feel free to ask me for a recommendation!";
+  }
 
   // personalized: last order from the user's real order history
   if (text.includes('last time') || text.includes('last order') || text.includes('previous order')) {
@@ -58,10 +67,14 @@ function getAnswer(question, user, orders) {
 function ChatBot() {
   const { user } = useAuth();
   const { orders } = useOrders();
+  const { special } = useMenu();
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-        { from: 'bot', text: `Hi! I'm the ${restaurant.name} assistant. How can I help you today?` },
+    {
+      from: 'bot',
+      text: `Hi! Welcome to ${restaurant.name}. I'm your AI assistant. How can I help you today?`,
+    },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -82,7 +95,10 @@ function ChatBot() {
 
     // short delay so it feels like the AI is "thinking"
     setTimeout(() => {
-      setMessages((prev) => [...prev, { from: 'bot', text: getAnswer(text, user, orders) }]);
+      setMessages((prev) => [
+        ...prev,
+        { from: 'bot', text: getAnswer(text, user, orders, special) },
+      ]);
       setIsTyping(false);
     }, 700);
   }
@@ -92,7 +108,7 @@ function ChatBot() {
     sendMessage(input);
   }
 
-    return (
+  return (
     <>
       {isOpen && (
         <div className="chat-window">
