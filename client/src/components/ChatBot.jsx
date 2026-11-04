@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { aiResponses, fallbackAnswer, suggestedQuestions } from '../data/aiResponses';
 import { useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrderContext';
+import { restaurant } from '../data/restaurantInfo';
 
 // turns ['A', 'B', 'C'] into "A, B and C"
 function joinNames(names) {
@@ -59,7 +60,7 @@ function ChatBot() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { from: 'bot', text: "Hi! I'm your Smart Restaurant assistant. How can I help you today?" },
+        { from: 'bot', text: `Hi! I'm the ${restaurant.name} assistant. How can I help you today?` },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -95,7 +96,7 @@ function ChatBot() {
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
-            <span>🤖 Restaurant Assistant</span>
+            <span>{restaurant.name} Assistant</span>
             <button className="close-btn" onClick={() => setIsOpen(false)}>×</button>
           </div>
 

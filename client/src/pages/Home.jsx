@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
+import { restaurant } from '../data/restaurantInfo';
 
 // small feature boxes under the special
 const features = [

@@ -1198,8 +1198,11 @@ input[type='range'] {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: white;
   text-decoration: none;
@@ -2603,4 +2606,17 @@ input[type='range'] {
     width: 100%;
     text-align: left;
   }
+}
+
+/* footer logo */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.footer-logo strong {
+  margin-bottom: 0;
 }

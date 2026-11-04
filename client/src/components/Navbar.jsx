@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import Logo from './Logo';
+import { restaurant } from '../data/restaurantInfo';
 
 function Navbar() {
   const { totalItems } = useCart();
@@ -42,7 +44,8 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo" onClick={closeMenu}>
-        🍽️ Smart Restaurant
+        <Logo size={38} />
+        <span>{restaurant.name}</span>
       </Link>
 
       {/* only visible on small screens */}
