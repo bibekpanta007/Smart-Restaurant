@@ -11,6 +11,7 @@ function MenuItemForm({ initialItem, onSave, onCancel }) {
           ...initialItem,
           ingredients: initialItem.ingredients.join(', '),
           price: String(initialItem.price),
+          image: initialItem.image || '',
         }
       : {
           name: '',
@@ -20,6 +21,7 @@ function MenuItemForm({ initialItem, onSave, onCancel }) {
           price: '',
           dietary: [],
           available: true,
+          image: '',
         }
   );
   const [error, setError] = useState('');
@@ -69,6 +71,7 @@ function MenuItemForm({ initialItem, onSave, onCancel }) {
       price: Math.round(price * 100) / 100,
       dietary: form.dietary,
       available: form.available,
+      image: form.image.trim(),
     });
   }
 
@@ -100,6 +103,16 @@ function MenuItemForm({ initialItem, onSave, onCancel }) {
         <label className="form-field">
           Ingredients (comma separated)
           <input name="ingredients" value={form.ingredients} onChange={handleChange} />
+        </label>
+
+        <label className="form-field full-width">
+          Image path (optional)
+          <input
+            name="image"
+            value={form.image}
+            onChange={handleChange}
+            placeholder="/images/my-dish.jpg"
+          />
         </label>
 
         <label className="form-field full-width">
