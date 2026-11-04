@@ -32,8 +32,8 @@ export const aiResponses = [
     answer: 'Our vegan options are the Garden Salad, Fruit Sorbet and Fresh Lemonade.',
   },
   {
-    keywords: ['hour', 'open', 'close'],
-    answer: 'We are open Tuesday to Sunday, 11 AM to 10 PM. We are closed on Mondays.',
+    keywords: ['vegan'],
+    answer: 'Our vegan options include the Garden Salad, Tomato Basil Soup, Fruit Sorbet, Fresh Lemonade and Sparkling Water.',
   },
   {
     keywords: ['deliver', 'pickup'],

@@ -1,7 +1,8 @@
-// Sample menu items for the restaurant.
+// Default menu for the restaurant.
 // Later (final project) this will come from the backend database.
 
 const menuItems = [
+  // ----- Starters -----
   {
     id: 1,
     name: 'Garlic Bread',
@@ -11,6 +12,7 @@ const menuItems = [
     price: 6.99,
     dietary: ['Vegetarian'],
     available: true,
+    image: '/images/garlic-bread.jpg',
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const menuItems = [
     price: 8.49,
     dietary: ['Vegetarian', 'Vegan', 'Gluten-Free'],
     available: true,
+    image: '/images/garden-salad.jpg',
   },
   {
     id: 3,
@@ -31,9 +34,23 @@ const menuItems = [
     price: 12.99,
     dietary: ['Gluten-Free'],
     available: true,
+    image: '/images/chicken-wings.jpg',
   },
   {
     id: 4,
+    name: 'Tomato Basil Soup',
+    category: 'Starters',
+    description: 'Slow-cooked tomato soup with fresh basil.',
+    ingredients: ['Tomato', 'Basil', 'Onion', 'Olive Oil'],
+    price: 7.49,
+    dietary: ['Vegetarian', 'Vegan', 'Gluten-Free'],
+    available: true,
+    image: '/images/tomato-soup.jpg',
+  },
+
+  // ----- Mains -----
+  {
+    id: 5,
     name: 'Chicken Alfredo',
     category: 'Mains',
     description: 'Fettuccine pasta in a creamy parmesan sauce with grilled chicken.',
@@ -41,9 +58,10 @@ const menuItems = [
     price: 18.99,
     dietary: [],
     available: true,
+    image: '/images/chicken-alfredo.jpg',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Vegetable Pasta',
     category: 'Mains',
     description: 'Penne with roasted vegetables in tomato sauce.',
@@ -51,9 +69,10 @@ const menuItems = [
     price: 15.49,
     dietary: ['Vegetarian'],
     available: true,
+    image: '/images/vegetable-pasta.jpg',
   },
   {
-    id: 6,
+    id: 7,
     name: 'Margherita Pizza',
     category: 'Mains',
     description: 'Classic pizza with tomato, mozzarella and fresh basil.',
@@ -61,9 +80,10 @@ const menuItems = [
     price: 16.99,
     dietary: ['Vegetarian'],
     available: true,
+    image: '/images/margherita-pizza.jpg',
   },
   {
-    id: 7,
+    id: 8,
     name: 'Gluten-Free Pasta',
     category: 'Mains',
     description: 'Gluten-free spaghetti with marinara sauce.',
@@ -71,9 +91,34 @@ const menuItems = [
     price: 16.49,
     dietary: ['Vegetarian', 'Gluten-Free'],
     available: true,
+    image: '/images/gluten-free-pasta.jpg',
   },
   {
-    id: 8,
+    id: 9,
+    name: 'Grilled Salmon',
+    category: 'Mains',
+    description: 'Atlantic salmon with lemon herb butter and asparagus.',
+    ingredients: ['Salmon', 'Lemon', 'Asparagus', 'Herb Butter'],
+    price: 19.99,
+    dietary: ['Gluten-Free'],
+    available: true,
+    image: '/images/grilled-salmon.jpg',
+  },
+  {
+    id: 10,
+    name: 'Classic Beef Burger',
+    category: 'Mains',
+    description: 'Juicy beef patty with cheddar, lettuce and tomato on a brioche bun.',
+    ingredients: ['Beef Patty', 'Brioche Bun', 'Cheddar', 'Lettuce', 'Tomato'],
+    price: 17.49,
+    dietary: [],
+    available: true,
+    image: '/images/beef-burger.jpg',
+  },
+
+  // ----- Desserts -----
+  {
+    id: 11,
     name: 'Chocolate Lava Cake',
     category: 'Desserts',
     description: 'Warm chocolate cake with a melting centre.',
@@ -81,9 +126,10 @@ const menuItems = [
     price: 8.99,
     dietary: ['Vegetarian'],
     available: true,
+    image: '/images/chocolate-lava-cake.jpg',
   },
   {
-    id: 9,
+    id: 12,
     name: 'Fruit Sorbet',
     category: 'Desserts',
     description: 'Refreshing mango and raspberry sorbet.',
@@ -91,9 +137,34 @@ const menuItems = [
     price: 6.49,
     dietary: ['Vegan', 'Gluten-Free'],
     available: true,
+    image: '/images/fruit-sorbet.jpg',
   },
   {
-    id: 10,
+    id: 13,
+    name: 'Tiramisu',
+    category: 'Desserts',
+    description: 'Coffee-soaked ladyfingers layered with mascarpone cream.',
+    ingredients: ['Ladyfingers', 'Mascarpone', 'Espresso', 'Cocoa'],
+    price: 8.49,
+    dietary: ['Vegetarian'],
+    available: true,
+    image: '/images/tiramisu.jpg',
+  },
+  {
+    id: 14,
+    name: 'New York Cheesecake',
+    category: 'Desserts',
+    description: 'Creamy baked cheesecake with a graham cracker crust.',
+    ingredients: ['Cream Cheese', 'Graham Crackers', 'Sugar', 'Eggs'],
+    price: 7.99,
+    dietary: ['Vegetarian'],
+    available: true,
+    image: '/images/cheesecake.jpg',
+  },
+
+  // ----- Beverages -----
+  {
+    id: 15,
     name: 'Fresh Lemonade',
     category: 'Beverages',
     description: 'Homemade lemonade with mint.',
@@ -101,9 +172,10 @@ const menuItems = [
     price: 4.49,
     dietary: ['Vegan', 'Gluten-Free'],
     available: true,
+    image: '/images/lemonade.jpg',
   },
   {
-    id: 11,
+    id: 16,
     name: 'Iced Coffee',
     category: 'Beverages',
     description: 'Cold brewed coffee served over ice.',
@@ -111,12 +183,35 @@ const menuItems = [
     price: 4.99,
     dietary: ['Vegetarian', 'Gluten-Free'],
     available: false,
+    image: '/images/iced-coffee.jpg',
+  },
+  {
+    id: 17,
+    name: 'Mango Smoothie',
+    category: 'Beverages',
+    description: 'Blended mango, yogurt and a touch of honey.',
+    ingredients: ['Mango', 'Yogurt', 'Honey', 'Ice'],
+    price: 5.99,
+    dietary: ['Vegetarian', 'Gluten-Free'],
+    available: true,
+    image: '/images/mango-smoothie.jpg',
+  },
+  {
+    id: 18,
+    name: 'Sparkling Water',
+    category: 'Beverages',
+    description: 'Chilled sparkling mineral water with a lemon slice.',
+    ingredients: ['Sparkling Water', 'Lemon'],
+    price: 2.99,
+    dietary: ['Vegan', 'Gluten-Free'],
+    available: true,
+    image: '/images/sparkling-water.jpg',
   },
 ];
 
 export const categories = ['Starters', 'Mains', 'Desserts', 'Beverages'];
 
-// helper function so pages don't use the array directly
+// helper function that returns the default menu
 // (in the final project this will call the API instead)
 export function getMenuItems() {
   return menuItems;
