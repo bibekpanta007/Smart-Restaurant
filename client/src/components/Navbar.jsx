@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -6,6 +7,9 @@ function Navbar() {
   const { totalItems } = useCart();
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
+
+  // open / closed state for the mobile menu
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // links everyone can see
   const links = [
@@ -25,18 +29,35 @@ function Navbar() {
     links.push({ path: '/login', name: 'Login' });
   }
 
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   function handleLogout() {
     logout();
+    closeMenu();
     navigate('/');
   }
 
   return (
     <nav className="navbar">
-      <h1 className="logo">Smart Restaurant</h1>
-      <ul>
+      <Link to="/" className="logo" onClick={closeMenu}>
+        🍽️ Smart Restaurant
+      </Link>
+
+      {/* only visible on small screens */}
+      <button
+        className="menu-toggle"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        {menuOpen ? '✕' : '☰'}
+      </button>
+
+      <ul className={menuOpen ? 'open' : ''}>
         {links.map((link) => (
           <li key={link.path}>
-            <NavLink to={link.path} end>
+            <NavLink to={link.path} end onClick={closeMenu}>
               {link.name}
               {link.path === '/cart' && totalItems > 0 && (
                 <span className="cart-badge">{totalItems}</span>
