@@ -2647,3 +2647,42 @@ input[type='range'] {
   color: rgba(255, 255, 255, 0.85);
   font-size: 54px;
 }
+
+/* today's special in admin */
+.admin-hint {
+  margin-bottom: 12px;
+}
+
+.star-btn {
+  display: flex;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.star-btn:hover {
+  color: var(--gold);
+  transform: scale(1.15);
+}
+
+.star-btn.active {
+  color: var(--gold);
+}
+
+/* fill the star when it's the special */
+.star-btn.active svg {
+  fill: var(--gold);
+}
+
+.star-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.special-row {
+  background-color: #fff8ec;
+}

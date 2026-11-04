@@ -3,6 +3,9 @@ import { getMenuItems } from '../data/menuData';
 
 const MenuContext = createContext();
 
+// Chicken Alfredo is the special by default (matches the AI dataset)
+const DEFAULT_SPECIAL_ID = 5;
+
 export function MenuProvider({ children }) {
   // start with the saved menu, or the default items from menuData.js
   const [menuItems, setMenuItems] = useState(() => {
@@ -10,9 +13,22 @@ export function MenuProvider({ children }) {
     return saved ? JSON.parse(saved) : getMenuItems();
   });
 
+  // id of the item the admin picked as today's special
+  const [specialId, setSpecialId] = useState(() => {
+    const saved = localStorage.getItem('specialId');
+    return saved ? Number(saved) : DEFAULT_SPECIAL_ID;
+  });
+
   useEffect(() => {
     localStorage.setItem('menuItems', JSON.stringify(menuItems));
   }, [menuItems]);
+
+  useEffect(() => {
+    localStorage.setItem('specialId', String(specialId));
+  }, [specialId]);
+
+  // the full special item (null if it was deleted)
+  const special = menuItems.find((item) => item.id === specialId) || null;
 
   function addMenuItem(item) {
     setMenuItems((prev) => [...prev, { ...item, id: Date.now() }]);
@@ -34,14 +50,29 @@ export function MenuProvider({ children }) {
     );
   }
 
-  // go back to the default menu from menuData.js
+  function setSpecial(id) {
+    setSpecialId(id);
+  }
+
+  // go back to the default menu and special
   function resetMenu() {
     setMenuItems(getMenuItems());
+    setSpecialId(DEFAULT_SPECIAL_ID);
   }
 
   return (
     <MenuContext.Provider
-      value={{ menuItems, addMenuItem, updateMenuItem, deleteMenuItem, toggleAvailability, resetMenu }}
+      value={{
+        menuItems,
+        special,
+        specialId,
+        setSpecial,
+        addMenuItem,
+        updateMenuItem,
+        deleteMenuItem,
+        toggleAvailability,
+        resetMenu,
+      }}
     >
       {children}
     </MenuContext.Provider>

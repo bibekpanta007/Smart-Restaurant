@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import { LuStar } from 'react-icons/lu';
 import { useMenu } from '../../context/MenuContext';
 import MenuItemForm from './MenuItemForm';
 
 function AdminMenu() {
-  const { menuItems, addMenuItem, updateMenuItem, deleteMenuItem, toggleAvailability, resetMenu } =
-    useMenu();
+  const {
+    menuItems,
+    specialId,
+    setSpecial,
+    addMenuItem,
+    updateMenuItem,
+    deleteMenuItem,
+    toggleAvailability,
+    resetMenu,
+  } = useMenu();
 
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState(null); // null = adding a new item
@@ -56,6 +65,8 @@ function AdminMenu() {
         </div>
       </div>
 
+      <p className="hint admin-hint">Click the star to choose today's special.</p>
+
       {/* key makes the form reset when we switch to a different item */}
       {showForm && (
         <MenuItemForm
@@ -70,6 +81,7 @@ function AdminMenu() {
         <table className="admin-table">
           <thead>
             <tr>
+              <th>Special</th>
               <th>Name</th>
               <th>Category</th>
               <th>Price</th>
@@ -79,26 +91,41 @@ function AdminMenu() {
             </tr>
           </thead>
           <tbody>
-            {menuItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>{item.dietary.length > 0 ? item.dietary.join(', ') : '—'}</td>
-                <td>
-                  <button
-                    className={item.available ? 'toggle on' : 'toggle'}
-                    onClick={() => toggleAvailability(item.id)}
-                  >
-                    {item.available ? 'Yes' : 'No'}
-                  </button>
-                </td>
-                <td className="actions">
-                  <button className="link-btn" onClick={() => handleEdit(item)}>Edit</button>
-                  <button className="remove-btn" onClick={() => handleDelete(item)}>Delete</button>
-                </td>
-              </tr>
-            ))}
+            {menuItems.map((item) => {
+              const isSpecial = item.id === specialId;
+
+              return (
+                <tr key={item.id} className={isSpecial ? 'special-row' : ''}>
+                  <td>
+                    {/* unavailable items can't be the special */}
+                    <button
+                      className={isSpecial ? 'star-btn active' : 'star-btn'}
+                      onClick={() => setSpecial(item.id)}
+                      disabled={!item.available}
+                      title={isSpecial ? "Today's special" : 'Make this the special'}
+                    >
+                      <LuStar />
+                    </button>
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{item.category}</td>
+                  <td>${item.price.toFixed(2)}</td>
+                  <td>{item.dietary.length > 0 ? item.dietary.join(', ') : '—'}</td>
+                  <td>
+                    <button
+                      className={item.available ? 'toggle on' : 'toggle'}
+                      onClick={() => toggleAvailability(item.id)}
+                    >
+                      {item.available ? 'Yes' : 'No'}
+                    </button>
+                  </td>
+                  <td className="actions">
+                    <button className="link-btn" onClick={() => handleEdit(item)}>Edit</button>
+                    <button className="remove-btn" onClick={() => handleDelete(item)}>Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
