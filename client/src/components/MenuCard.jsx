@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { LuUtensilsCrossed } from 'react-icons/lu';
 
 // emoji used when an item has no photo
-const categoryEmoji = {
-  Starters: '🥗',
-  Mains: '🍝',
-  Desserts: '🍰',
-  Beverages: '🥤',
-};
+          <LuUtensilsCrossed />
 
 // Shows one menu item. The item is passed in as a prop.
 function MenuCard({ item }) {

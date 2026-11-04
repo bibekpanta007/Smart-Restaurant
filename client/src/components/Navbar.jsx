@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import Logo from './Logo';
 import { restaurant } from '../data/restaurantInfo';
+import { LuMenu, LuX } from 'react-icons/lu';
 
 function Navbar() {
   const { totalItems } = useCart();
@@ -54,7 +55,7 @@ function Navbar() {
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
       >
-        {menuOpen ? '✕' : '☰'}
+                {menuOpen ? <LuX /> : <LuMenu />}
       </button>
 
       <ul className={menuOpen ? 'open' : ''}>

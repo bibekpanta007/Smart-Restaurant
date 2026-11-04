@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
 import { restaurant } from '../data/restaurantInfo';
+import { LuShoppingBag, LuCalendarDays, LuSparkles } from 'react-icons/lu';
 
 // small feature boxes under the special
 const features = [
-  { icon: '🍝', title: 'Order Online', text: 'Choose your favourite dishes for pickup or delivery.' },
-  { icon: '📅', title: 'Book a Table', text: 'Reserve a table or plan a birthday or corporate event.' },
-  { icon: '🤖', title: 'AI Assistant', text: 'Ask about specials, dietary options or get recommendations.' },
+  { icon: <LuShoppingBag />, title: 'Order Online', text: 'Choose your favourite dishes for pickup or delivery.' },
+  { icon: <LuCalendarDays />, title: 'Book a Table', text: 'Reserve a table or plan a birthday or corporate event.' },
+  { icon: <LuSparkles />, title: 'AI Assistant', text: 'Ask about specials, dietary options or get recommendations.' },
 ];
 
 function Home() {

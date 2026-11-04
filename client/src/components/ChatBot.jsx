@@ -3,6 +3,7 @@ import { aiResponses, fallbackAnswer, suggestedQuestions } from '../data/aiRespo
 import { useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrderContext';
 import { restaurant } from '../data/restaurantInfo';
+import { LuMessageCircle, LuX, LuSparkles } from 'react-icons/lu';
 
 // turns ['A', 'B', 'C'] into "A, B and C"
 function joinNames(names) {
@@ -91,13 +92,17 @@ function ChatBot() {
     sendMessage(input);
   }
 
-  return (
+    return (
     <>
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
-            <span>{restaurant.name} Assistant</span>
-            <button className="close-btn" onClick={() => setIsOpen(false)}>×</button>
+            <span className="chat-title">
+              <LuSparkles /> {restaurant.name} Assistant
+            </span>
+            <button className="close-btn" onClick={() => setIsOpen(false)} aria-label="Close chat">
+              <LuX />
+            </button>
           </div>
 
           <div className="chat-messages">
@@ -131,8 +136,12 @@ function ChatBot() {
       )}
 
       {/* floating button to open / close the chat */}
-      <button className="chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? '×' : '💬'}
+      <button
+        className="chat-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+      >
+        {isOpen ? <LuX /> : <LuMessageCircle />}
       </button>
     </>
   );
