@@ -9,7 +9,7 @@ const DELIVERY_FEE = 4.99;
 function Checkout() {
   const { cartItems, totalPrice, clearCart } = useCart();
   const { placeOrder } = useOrders();
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   // all form fields in one state object (name is filled in if logged in)
@@ -72,6 +72,17 @@ function Checkout() {
 
     clearCart();
     navigate(`/order/${order.id}`);
+  }
+
+  // admins manage the restaurant, they don't place orders
+  if (isAdmin) {
+    return (
+      <div className="empty-cart">
+        <h2 className="page-title">Checkout</h2>
+        <p>Admin accounts can't place orders. Please log in with a customer account to order.</p>
+        <Link to="/admin" className="btn">Go to Dashboard</Link>
+      </div>
+    );
   }
 
   if (cartItems.length === 0) {
