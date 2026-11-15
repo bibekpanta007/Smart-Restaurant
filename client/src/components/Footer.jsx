@@ -9,7 +9,7 @@ function Footer() {
         <strong>{restaurant.name}</strong>
       </div>
       <p>{restaurant.hours}</p>
-      <p>© 2026 {restaurant.name} · SODV2201 Project</p>
+      <p>© 2026 {restaurant.name} · All rights reserved .</p>
     </footer>
   );
 }
