@@ -55,7 +55,7 @@ function Navbar() {
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
       >
-                {menuOpen ? <LuX /> : <LuMenu />}
+      {menuOpen ? <LuX /> : <LuMenu />}
       </button>
 
       <ul className={menuOpen ? 'open' : ''}>
