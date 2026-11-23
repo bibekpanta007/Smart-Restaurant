@@ -1,8 +1,9 @@
 // load the settings from .env first, so everything else can use them
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 
 const express = require('express');
 const cors = require('cors');
+const pool = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,11 +14,25 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 // read JSON from request bodies (req.body)
 app.use(express.json());
 
-// test route to check the API is running
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Everest Kitchen API is running' });
+// test route: checks the API and the database
+app.get('/api/health', async (req, res) => {
+  await pool.query('SELECT 1');
+  res.json({ status: 'ok', database: 'connected' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// connect to the database first, then start the server
+async function startServer() {
+  try {
+    await pool.query('SELECT 1');
+    console.log('Connected to MySQL database');
+
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Could not connect to the database:', error.message);
+    process.exit(1); // stop the app if the database is not available
+  }
+}
+
+startServer();
