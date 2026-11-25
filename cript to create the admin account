@@ -1,0 +1,16 @@
+[1mdiff --git a/server/.env.example b/server/.env.example[m
+[1mindex e305b88..7b17ea7 100644[m
+[1m--- a/server/.env.example[m
+[1m+++ b/server/.env.example[m
+[36m@@ -7,4 +7,8 @@[m [mDB_PASSWORD=[m
+ DB_NAME=everest_kitchen[m
+ [m
+ JWT_SECRET=[m
+[31m-JWT_EXPIRES_IN=1d[m
+\ No newline at end of file[m
+[32m+[m[32mJWT_EXPIRES_IN=1d[m
+[32m+[m
+[32m+[m[32mADMIN_NAME=Admin[m
+[32m+[m[32mADMIN_EMAIL=admin@everestkitchen.com[m
+[32m+[m[32mADMIN_PASSWORD=[m
+\ No newline at end of file[m
