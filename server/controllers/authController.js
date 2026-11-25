@@ -43,4 +43,9 @@ async function login(req, res) {
   res.json({ message: 'Logged in.', token: createToken(safeUser), user: safeUser });
 }
 
-module.exports = { register, login };
+// GET /api/auth/me
+async function getMe(req, res) {
+  res.json({ user: req.user });
+}
+
+module.exports = { register, login, getMe };
