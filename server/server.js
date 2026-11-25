@@ -4,6 +4,7 @@ require('dotenv').config({ quiet: true });
 const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,6 +20,10 @@ app.get('/api/health', async (req, res) => {
   await pool.query('SELECT 1');
   res.json({ status: 'ok', database: 'connected' });
 });
+
+// these must come after all routes
+app.use(notFound);
+app.use(errorHandler);
 
 // connect to the database first, then start the server
 async function startServer() {
